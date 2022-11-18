@@ -48,7 +48,7 @@ We use the command `touch` and `echo` to create the .gitignore file and write th
 
 ## Part (2)
 
-The function for reading data and creating dataframe is in the following chunk, basically, we just need two parameters `skip` and `nrows` of `read.table()` function to control the rows we want to read. 
+The function for reading data and creating dataframe is in the following chunk, basically, we just need two parameters `skip` and `nrows` of `read.table()` function to control the rows we want to read. We also paste the FIPS code and census tract code together for each census tract to get the unique their tract code.
 ```{r}
 read_business_academic <- function(n1, n2) {
   col_name <- read.table('data/2020_Business_Academic_QCQ.txt', 
@@ -154,19 +154,20 @@ top_sales
 ```
 
 ## Part (6)
-The commit could be made by command `git commit`, we use the following command to make it along with a message. 
+The commit could be made by command `git commit`, we use the following command to make it along with a message. Notice, that given we execute the sql query in R, the only thing we want to track by git is this Rmd file and its figures, so we only add them to git. 
 
+`git add hw3.Rmd, fig/`
 `git commit -m 'HW3 until Q1 Part 5'`
 
 The result of commit is shown in the following Figure 4
 
-![First Commit](fig/first_commit)
+![First Commit](fig/first_commit.png)
 
 To create and switch to a new branch, the command `git checkout` is useful, as shown in the next line. 
 
 `git checkout -b HW3_2`
 
-![New Branch](fig/new_branch)
+![New Branch](fig/new_branch.png)
 
 
 ## Part (7)
