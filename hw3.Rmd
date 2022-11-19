@@ -209,10 +209,6 @@ source('load_house_data.R')
 house_table <- load_house_data('data/AL.csv')
 ```
 
-```{r}
-house_table
-```
-
 ### Summarize Statistics
 The `df2` table could also be gotten by the `group_by()` function as shown below.
 ```{r}
@@ -232,14 +228,18 @@ dbWriteTable(db_connect, 'df2', df2, overwrite=TRUE)
 ```
 
 ## Part (9)
-The commit command is shown in the next line. 
+Until now, we have change this Rmd file, so only need to add this file. The commit command is shown in the next line. 
+
+`git add hw3.Rmd`
 
 `git commit -m 'HW3 until Q1 Part 8'`
 
+![Second Commit](fig/second_commit.png)
 
 The `git log` command will display our history information of commit, and the `HEAD` parameter means we track the history information from the very beginning. 
 
 `git log HEAD`
+![Git Log](fig/git_log.png)
 
 ## Part (10)
 
@@ -292,12 +292,13 @@ dbWriteTable(db_connect, 'df3', df3, overwrite=TRUE)
 ```
 
 ## Part (11)
+We use the following query to combine those three tables `df1`,`df2` and `df3` together. We'll use the average home value per sale as the target variable. For the key effect, we use the cut-off of the ratio of White people in each census tract as the random effect, while the ratio between White people and Black, Asian and Indian as the fixed effect. The query to get them is shown below. 
 ```{r}
 combine_table_query <- "SELECT d1.census_tract,
                                1000*d2.home_valuation/d1.sales_volume as avg_home_value,
                                ROUND(d3.White/d3.Total, 1) as white_ratio,
                                d3.White/d3.Black as white_black_ratio,
-                               d3.White/d3.Asian as white_asin_ratio,
+                               d3.White/d3.Asian as white_asian_ratio,
                                d3.White/d3.Indian as white_indian_ratio
                           FROM df1 d1
                           JOIN df2 d2
